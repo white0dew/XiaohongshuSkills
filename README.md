@@ -1,6 +1,6 @@
 # RedBookSkills
 
-[![Stargazers over time](https://starchart.cc/white0dew/XiaohongshuSkills.svg?variant=adaptive)](https://starchart.cc/white0dew/XiaohongshuSkills)
+
 
 自动发布内容到小红书（Xiaohongshu/RED）的命令行工具，也支持仅启动测试浏览器（不发布）。
 通过 Chrome DevTools Protocol (CDP) 实现自动化发布，支持多账号管理、无头模式运行、自动搜索素材与内容数据抓取等功能。
@@ -321,6 +321,8 @@ MIT License
 ### 知识星球，分享最新的使用技巧
 <img src="20260302-141029.jpg" alt="知识星球二维码" width="240" />
 
+## Stars
+[![Stargazers over time](https://starchart.cc/white0dew/XiaohongshuSkills.svg?variant=adaptive)](https://starchart.cc/white0dew/XiaohongshuSkills)
 
 ## 致谢
 灵感来自：[Post-to-xhs](https://github.com/Angiin/Post-to-xhs)
