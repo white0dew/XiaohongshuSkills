@@ -136,7 +136,7 @@ SELECTORS = {
 }
 
 # Timing
-PAGE_LOAD_WAIT = 3  # seconds to wait after navigation
+PAGE_LOAD_WAIT = 1.5  # seconds to wait after navigation
 TAB_CLICK_WAIT = 2  # seconds to wait after clicking tab
 UPLOAD_WAIT = 6  # seconds to wait after image upload for editor to appear
 VIDEO_PROCESS_TIMEOUT = 120  # seconds to wait for video processing
@@ -880,7 +880,7 @@ class XiaohongshuPublisher:
     def _capture_search_recommendations_via_network(
         self,
         keyword: str,
-        wait_seconds: float = 8.0,
+        wait_seconds: float = 2.5,
         max_suggestions: int = 12,
     ) -> dict[str, Any]:
         """Capture recommend API response from real page traffic."""
@@ -1001,9 +1001,6 @@ class XiaohongshuPublisher:
         if not keyword:
             raise CDPError("Keyword cannot be empty.")
 
-        self._navigate(SEARCH_BASE_URL)
-        self._sleep(2, minimum_seconds=1.0)
-
         explorer = FeedExplorer(
             self._evaluate,
             self._sleep,
@@ -1011,20 +1008,13 @@ class XiaohongshuPublisher:
             click_mouse=self._click_mouse,
         )
 
-        recommendation_result = self._capture_search_recommendations_via_network(keyword=keyword)
-        recommended_keywords = recommendation_result.get("suggestions", [])
-
-        if not recommendation_result.get("ok"):
-            reason = recommendation_result.get("reason") or "recommend_api_failed"
-            print(
-                "[cdp_publish] Warning: failed to capture search recommendations via API. "
-                f"reason={reason}"
-            )
-
-        # Always navigate with keyword URL to keep feed extraction stable.
+        # Navigate directly to search URL with keyword for faster results.
+        # The recommend keyword capture is skipped to avoid ~8-12s overhead.
         search_url = make_search_url(keyword)
         self._navigate(search_url)
-        self._sleep(2, minimum_seconds=1.0)
+        self._sleep(1, minimum_seconds=0.5)
+
+        recommended_keywords: list[str] = []
 
         try:
             feeds = explorer.search_feeds(keyword=keyword, filters=filters)
