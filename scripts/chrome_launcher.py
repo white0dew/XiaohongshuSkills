@@ -90,11 +90,15 @@ def get_user_data_dir(account: Optional[str] = None) -> str:
         from account_manager import get_profile_dir
         return get_profile_dir(account)
     except ImportError:
-        # Fallback if account_manager not available
-        local_app_data = os.environ.get("LOCALAPPDATA", "")
-        if not local_app_data:
-            local_app_data = os.path.expanduser("~")
-        return os.path.join(local_app_data, "Google", "Chrome", PROFILE_DIR_NAME)
+        # Fallback if account_manager not available (cross-platform)
+        if sys.platform == "win32":
+            base = os.environ.get("LOCALAPPDATA", os.path.expanduser("~"))
+            return os.path.join(base, "Google", "Chrome", PROFILE_DIR_NAME)
+        if sys.platform == "darwin":
+            return os.path.expanduser(
+                f"~/Library/Application Support/Google/Chrome/{PROFILE_DIR_NAME}"
+            )
+        return os.path.expanduser(f"~/.config/google-chrome/{PROFILE_DIR_NAME}")
 
 
 def is_port_open(port: int, host: str = "127.0.0.1") -> bool:
