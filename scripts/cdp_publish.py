@@ -3492,6 +3492,17 @@ class XiaohongshuPublisher:
         selector_alt_literal = json.dumps(selector_alt)
         tab_text_literal = json.dumps(tab_text)
 
+        # Poll until the tab actually exists in the DOM (React app needs time on first load).
+        tab_selector_literal = json.dumps(tab_selector)
+        tab_ready_deadline = time.time() + 15.0
+        while time.time() < tab_ready_deadline:
+            tab_count = self._evaluate(
+                f"document.querySelectorAll({tab_selector_literal}).length"
+            )
+            if isinstance(tab_count, (int, float)) and tab_count > 0:
+                break
+            time.sleep(0.5)
+
         clicked = self._evaluate(f"""
             (function() {{
                 var targetText = {tab_text_literal};
