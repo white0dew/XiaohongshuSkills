@@ -24,9 +24,20 @@ from typing import Optional
 CONFIG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config")
 ACCOUNTS_FILE = os.path.join(CONFIG_DIR, "accounts.json")
 
-# Base directory for account profiles
-PROFILES_BASE = os.path.join(os.environ.get("LOCALAPPDATA", os.path.expanduser("~")),
-                              "Google", "Chrome", "XiaohongshuProfiles")
+# Base directory for account profiles (cross-platform)
+def _default_profiles_base() -> str:
+    if sys.platform == "win32":
+        base = os.environ.get("LOCALAPPDATA", os.path.expanduser("~"))
+        return os.path.join(base, "Google", "Chrome", "XiaohongshuProfiles")
+    if sys.platform == "darwin":
+        return os.path.expanduser(
+            "~/Library/Application Support/Google/Chrome/XiaohongshuProfiles"
+        )
+    # Linux / others
+    return os.path.expanduser("~/.config/google-chrome/XiaohongshuProfiles")
+
+
+PROFILES_BASE = _default_profiles_base()
 
 # Default account name (for backward compatibility)
 DEFAULT_PROFILE_NAME = "default"
