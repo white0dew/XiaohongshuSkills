@@ -1,5 +1,9 @@
 # RedBookSkills
 
+## 友情链接
+
+- [RayinAPI · AI API 网关](https://code.aistar.cool) —— AI 模型 API 网关服务。
+
 自动发布内容到小红书（Xiaohongshu/RED）的命令行工具，也支持仅启动测试浏览器（不发布）。
 通过 Chrome DevTools Protocol (CDP) 实现自动化发布，支持图文发布、视频发布、多账号管理、无头模式运行、自动搜索素材与内容数据抓取等功能。
 
