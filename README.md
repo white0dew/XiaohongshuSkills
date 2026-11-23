@@ -1,11 +1,5 @@
 # RedBookSkills
 
-## 赞助商
-
-<a href="https://go.apimart.ai/gh-xiaohongshuskills"><img src="assets/apimart-banner.png" alt="APIMart：AI 图片与视频生成 API 平台" width="480" /></a>
-
-感谢 APIMart 赞助了本项目！APIMart 是专注 AI 图片/视频生成的低价 API 平台，GPT-Image-2 低至 $0.006/张，1 美元可出图 160+ 张。图片、视频一套异步 API 通吃，提交任务拿 ID、回调取结果，跑批万张不超时、换模型不改代码。按量付费、无月费，通过此[注册链接](https://go.apimart.ai/gh-xiaohongshuskills)注册即可开用。
-
 自动发布内容到小红书（Xiaohongshu/RED）的命令行工具，也支持仅启动测试浏览器（不发布）。
 通过 Chrome DevTools Protocol (CDP) 实现自动化发布，支持图文发布、视频发布、多账号管理、无头模式运行、自动搜索素材与内容数据抓取等功能。
 
@@ -424,3 +418,7 @@ MIT License
 
 ## 致谢
 灵感来自：[Post-to-xhs](https://github.com/Angiin/Post-to-xhs)
+
+## 友情链接
+
+- [RayinAPI · AI API 网关](https://code.aistar.cool) —— AI 模型 API 网关服务。
